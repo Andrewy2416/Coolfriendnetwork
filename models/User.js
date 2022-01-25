@@ -12,12 +12,25 @@ const UserSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            match: [/.+@.+\..+/]
-            },
-
-            thoughts: [{ type: Schema.Types.ObjectId, ref: 'Thought' }],
-            friends: [{ type: Schema.Types.ObjectId, ref: 'User' }]
-        
+            validate: {
+                validator: function (v) {
+                    return /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(v);
+                },
+                message: props => `${props.value} is not a valid email!`
+            }
+        },
+        thoughts: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Thoughts'
+            }
+        ],
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ]
     },
     {
         toJSON: {

@@ -28,7 +28,7 @@ const userController = {
             .select('-__v')
             .then(dbUserData => {
                 if (!dbUserData) {
-                    res.status(404).json({ message: 'No user found at this id' });
+                    res.status(404).json({ message: 'No user for this id' });
                     return
                 }
                 res.json(dbUserData)
@@ -52,7 +52,7 @@ const userController = {
         User.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
             .then(dbUserData => {
                 if (!dbUserData) {
-                    res.status(404).json({ message: 'No user found at this id!' });
+                    res.status(404).json({ message: 'No user for this id' });
                     return;
                 }
 
@@ -70,7 +70,7 @@ const userController = {
                     Thoughts.findOneAndDelete({ _id: thought })
                         .then(dbThoughtData => {
                             if (!dbThoughtData) {
-                                res.status(500).json({ message: 'there was an error!' });
+                                res.status(500).json({ message: 'Error!' });
                                 return;
                             }
 
@@ -95,7 +95,7 @@ const userController = {
         )
             .then(dbUserData => {
                 if (!dbUserData) {
-                    res.status(404).json({ message: 'No user found at this id!' });
+                    res.status(404).json({ message: 'No user for this id' });
                     return;
                 }
                 res.json(dbUserData)
@@ -113,7 +113,7 @@ const userController = {
         )
             .then(dbUserData => {
                 if (!dbUserData) {
-                    res.status(404).json({ message: 'No user found at this id!' });
+                    res.status(404).json({ message: 'No user for this id' });
                     return;
                 }
 
