@@ -1,7 +1,7 @@
 const { Thoughts, User } = require('../models');
 
 thoughtsControllers = {
-    // get all thoughts
+    // all thoughts function
     getThoughts(req, res) {
         Thoughts.find({})
             .populate({
@@ -17,6 +17,7 @@ thoughtsControllers = {
                 res.status(400).json(err);
             });
     },
+    // find one thought function
     getThoughtsById({ params }, res) {
         Thoughts.findOne({ _id: params.id })
             .populate({
@@ -36,6 +37,7 @@ thoughtsControllers = {
                 res.status(400).json(err);
             });
     },
+    // create thoughts function
     createThoughts({ body }, res) {
         Thoughts.create(body)
             .then(({ username, _id }) => {
@@ -57,6 +59,7 @@ thoughtsControllers = {
                 res.status(400).json(err);
             });
     },
+    //update thoughts function
     updateThoughts({ body, params }, res) {
         Thoughts.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
             .then(dbThoughtsData => {
@@ -71,6 +74,7 @@ thoughtsControllers = {
                 res.status(400).json(err)
             })
     },
+    //delete thoughts function
     deleteThoughts({ params }, res) {
         Thoughts.findOneAndDelete({ _id: params.id })
             .then(({ username }) => {
@@ -93,6 +97,7 @@ thoughtsControllers = {
                 res.status(400).json(err);
             })
     },
+    //post reaction function
     createReaction({ params, body }, res) {
         Thoughts.findOneAndUpdate(
             { _id: params.thoughtId },
@@ -112,6 +117,7 @@ thoughtsControllers = {
                 res.status(400).json(err);
             });
     },
+    //delete reaction function
     removeReaction({ params }, res) {
         Thoughts.findOneAndUpdate(
             { _id: params.thoughtId },
